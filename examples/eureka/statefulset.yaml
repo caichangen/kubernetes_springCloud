@@ -36,7 +36,7 @@ spec:
         app: eureka-pod
     spec:
       containers:
-      - name: eureka-container  # 此处的name只是一个标识，比如我们在set image的时候需要-c指定修改哪个容器的镜像，那么此时就需要用到这里的name
+      - name: eureka-container  # 此处的name只是一个标识，比如我们在set image的时候需要-c指定修改哪个容器的镜像，那么此时就需要用到这里的name来指定要更新的容器
         image: eureka:latest
         imagePullPolicy: IfNotPresent
         ports:
