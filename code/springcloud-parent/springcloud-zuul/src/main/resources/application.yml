@@ -1,0 +1,44 @@
+###服务启动端口号
+server:
+  port: 80
+#  tomcat:
+#    max-threads: 10
+###服务名称(服务注册到eureka名称)  
+spring:
+    application:
+        name: app-zuul
+### config配置    
+    cloud:
+      config:
+      ####读取后缀
+        profile: dev
+        ####读取config-server注册地址
+        discovery:
+          service-id: config-server
+          enabled: true   
+          
+###服务注册到eureka地址
+eureka:
+  instance:
+    prefer-ip-address: true #以IP地址注册到服务中心
+  client:
+    service-url:
+           defaultZone: http://spring-cloud-controller-0.spring-cloud-service:8100/eureka
+###因为该应用为注册中心，不会注册自己
+    register-with-eureka: true
+###是否需要从eureka上获取注册信息
+    fetch-registry: true
+        
+###开启所有监控中心接口
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"        
+###设置feign客户端超时时间
+ribbon:
+###指的是建立连接所用的时间，适用于网络状况正常的情况下，两端连接所用的时间。
+  ReadTimeout: 5000
+###指的是建立连接后从服务器读取到可用资源所用的时间。 
+  ConnectTimeout: 5000    
+

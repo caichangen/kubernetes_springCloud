@@ -1,0 +1,45 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: spring-cloud
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: spring-cloud-service
+  namespace: spring-cloud
+spec:
+  clusterIP: None
+  ports:
+  - name: http
+    port: 8100
+    targetPort: 8100
+  selector:
+    app: eureka-pod
+---
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: spring-cloud-controller
+  namespace: spring-cloud
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: eureka-pod
+  serviceName: spring-cloud-service
+  template:
+    metadata:
+      name: eureka-pod
+      namespace: spring-cloud
+      labels:
+        app: eureka-pod
+    spec:
+      containers:
+      - name: eureka-container
+        image: eureka:latest
+        imagePullPolicy: IfNotPresent
+        ports:
+        - name: eureka-port
+          containerPort: 8100
+          hostPort: 8100

@@ -1,0 +1,22 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: zuul-controller
+  namespace: spring-cloud
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: zuul
+  template:
+    metadata:
+      name: zuul-pod
+      namespace: spring-cloud
+      labels:
+        app: zuul
+    spec:
+      restartPolicy: Always
+      containers:
+      - name: zuul-containers
+        imagePullPolicy: IfNotPresent
+        image: zuul:latest
