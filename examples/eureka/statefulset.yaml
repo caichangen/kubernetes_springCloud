@@ -30,13 +30,13 @@ spec:
   serviceName: spring-cloud-service
   template:
     metadata:
-      name: eureka-pod
+      name: eureka-pod  # 此处的name只是一个占位符，因为name字段比如有，pod最后的名字会是控制器的名字加上一个数字：spring-cloud-controller-0
       namespace: spring-cloud
       labels:
         app: eureka-pod
     spec:
       containers:
-      - name: eureka-container
+      - name: eureka-container  # 此处的name只是一个标识，比如我们在set image的时候需要-c指定修改哪个容器的镜像，那么此时就需要用到这里的name
         image: eureka:latest
         imagePullPolicy: IfNotPresent
         ports:
