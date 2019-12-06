@@ -12,4 +12,4 @@
 	docker build -t eureka:latest .
 	接下来只需要应用各个YAML配置即可
 	kubectl apply -f statefulset.yaml
-	kubectl apply -f deloyment.yaml
+	kubectl apply -f deployment.yaml
